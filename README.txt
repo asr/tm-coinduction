@@ -1,6 +1,8 @@
 Alberto Ciaffaglione, University of Udine (Italy) - October 2015
 "Towards Turing Computability via Coinduction" in Coq 8.4(pl5)
 
+ASR (2016-10-20): Tested with Coq 8.5pl2
+
 ------------------------------------------------------------------
 The contribution is structured as follows:
 - directory "animation": the whole contribution
