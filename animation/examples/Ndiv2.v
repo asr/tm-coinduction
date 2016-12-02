@@ -10,11 +10,11 @@
       3 1 -> 4 B
       4 B -> 2 R
 
-Definition div2: Spec := (1, one, W B, 1) :: 
-                         (1, B  ,   R, 2) :: 
-                         (2, one,   R, 3) :: 
-                         (3, B  ,   R, 3) :: 
-                         (3, one, W B, 4) :: 
+Definition div2: Spec := (1, one, W B, 1) ::
+                         (1, B  ,   R, 2) ::
+                         (2, one,   R, 3) ::
+                         (3, B  ,   R, 3) ::
+                         (3, one, W B, 4) ::
                          (4, B  ,   R, 2) :: nil.
 *)
 
@@ -32,7 +32,7 @@ Lemma repeat_comm: forall n l,
 induction n.
 simpl. reflexivity.
 simpl. intro. rewrite <- IHn. reflexivity.
-Qed. 
+Qed.
 
 (*
 cycle from the state 2, if an even number of ones

@@ -22,7 +22,7 @@ Qed.
 Lemma shift_stop: forall T s p,
       is_value T s p ->
       forall n, is_value (shift T n) s (n+p).
-induction T; intros. 
+induction T; intros.
 
 unfold is_value. simpl. reflexivity.
 
@@ -34,7 +34,7 @@ elim (eq_sym_dec (read s) s3); intro.
 rewrite a, a0 in H.
 rewrite eq_state in H. rewrite eq_sym in H. inversion H.
 
-rewrite a in H |- *. 
+rewrite a in H |- *.
 rewrite eq_state in H |- *. rewrite neq_sym in H |- *.
 apply IHT. assumption. auto. auto.
 
@@ -47,7 +47,7 @@ Qed.
 Lemma shift_move: forall T s p i x,
       tr T p s = Some (i, x) ->
       forall n, tr (shift T n) (n+p) s = Some (n+i, x).
-induction T; intros. 
+induction T; intros.
 
 simpl in H. inversion H.
 
@@ -60,7 +60,7 @@ rewrite a, a0 in H |-*.
 rewrite eq_state in H |-*. rewrite eq_sym in H |-*.
 inversion_clear H. reflexivity.
 
-rewrite a in H |- *. 
+rewrite a in H |- *.
 rewrite eq_state in H |- *. rewrite neq_sym in H |- *.
 apply IHT. assumption. auto. auto.
 

@@ -11,18 +11,18 @@
       4 B -> 2 R
 *)
 
-Definition div2: Spec := (1, one, 1, W B) :: 
-                         (1, B  , 2,   R) :: 
-                         (2, one, 3,   R) :: 
-                         (3, B  , 3,   R) :: 
-                         (3, one, 4, W B) :: 
+Definition div2: Spec := (1, one, 1, W B) ::
+                         (1, B  , 2,   R) ::
+                         (2, one, 3,   R) ::
+                         (3, B  , 3,   R) ::
+                         (3, one, 4, W B) ::
                          (4, B  , 2,   R) :: nil.
 
 (************************ Divergence proof ************************)
 
 Fixpoint ones (n:nat) {struct n}: list Sym :=
          match n with
-         | 0 => nil 
+         | 0 => nil
          | (S m) => (cons one (ones m))
          end.
 

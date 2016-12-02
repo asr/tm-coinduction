@@ -10,7 +10,7 @@ Load "adequacy/bigstep_lists".
 
 CoFixpoint Bs := Cons B Bs.
 
-Lemma unfold_HTape: forall h:HTape, 
+Lemma unfold_HTape: forall h:HTape,
                     h = match h with | Cons a k => Cons a k end.
 destruct h. auto.
 Qed.

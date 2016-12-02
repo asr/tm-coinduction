@@ -10,15 +10,15 @@ split; auto. apply sf0; assumption.
 
 split.
 apply sfI with i (pair (Cons (hd r) l) (tl r)). apply s1R; assumption.
-tauto. tauto.   
+tauto. tauto.
 
 split.
 apply sfI with i (pair (tl l) (Cons (hd l) r)). apply s1L; assumption.
-tauto. tauto.   
+tauto. tauto.
 
 split.
 apply sfI with i (pair l (Cons a (tl r))). apply s1W; assumption.
-tauto. tauto.   
+tauto. tauto.
 Qed.
 
 (****************** Small -> Big *********************)

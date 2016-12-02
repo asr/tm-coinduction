@@ -7,9 +7,9 @@
       2 1 -> 2 L
       2 B -> 1 1
 
-Definition undef: Spec := (1, one, 1,     R) :: 
-                          (1, B  , 2, W one) :: 
-                          (2, one, 2,     L) :: 
+Definition undef: Spec := (1, one, 1,     R) ::
+                          (1, B  , 2, W one) ::
+                          (2, one, 2,     L) ::
                           (2, B  , 1, W one) :: nil.
 *)
 
@@ -52,7 +52,7 @@ apply IHm.
 rewrite ones_comm. do 2 rewrite <- ones_step2. assumption.
 Qed.
 
-apply undef_scan_left2. 
+apply undef_scan_left2.
 apply co_hp.
 
 (* The proof is not accepted by Coq (try to apply Qed.)

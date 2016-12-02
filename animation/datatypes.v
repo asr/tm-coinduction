@@ -12,16 +12,16 @@ Parameter State: Set.
 Definition State := nat.
 
 (*
-Parameter Sym: Set. 
+Parameter Sym: Set.
 *)
 
 Inductive Sym: Set := B: Sym
                     | one: Sym
-                    | zero: Sym. 
+                    | zero: Sym.
 
 Inductive Head: Set := R: Head
                      | L: Head
-                     | W: Sym -> Head. 
+                     | W: Sym -> Head.
 
 Definition Spec: Set := (list (State * Sym * State * Head)).
 
@@ -41,14 +41,14 @@ Inductive Tape: Set := pair: HTape -> HTape -> Tape.
 Parameter tr: Spec -> State -> Sym -> option (State * Head).
 *)
 
-Fixpoint eqsym (a b:Sym) {struct a}: bool := 
+Fixpoint eqsym (a b:Sym) {struct a}: bool :=
          match a, b with B, B => true
                     |    one, one => true
                     |    zero, zero => true
                     |    _ , _ => false
          end.
 
-Fixpoint eqstate (q p:State) {struct q}: bool := 
+Fixpoint eqstate (q p:State) {struct q}: bool :=
          match q, p with 0, 0 => true
                     |    (S u), (S v) => (eqstate u v)
                     |    _, _ => false
@@ -57,7 +57,7 @@ Fixpoint eqstate (q p:State) {struct q}: bool :=
 Fixpoint tr (T:Spec) (q:State) (a:Sym) {struct T}: option (State * Head) :=
          match T with | nil => None
                       | (cons A T') =>
-         match A with (p, b, r, x) => 
+         match A with (p, b, r, x) =>
                       if (eqstate q p)
                       then if (eqsym b a)
                            then (Some (r, x))

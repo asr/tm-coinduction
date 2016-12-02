@@ -7,8 +7,8 @@ Implementation: 0 1 -> 1 R
                 1 1 -> 2 L
 *)
 
-Definition Dither: Spec := (0, one, 1, R) :: 
-                           (1, B  , 0, L) :: 
+Definition Dither: Spec := (0, one, 1, R) ::
+                           (1, B  , 0, L) ::
                            (1, one, 2, L) :: nil.
 
 (************************ Divergence proof ************************)

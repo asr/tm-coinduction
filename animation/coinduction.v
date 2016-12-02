@@ -7,8 +7,8 @@ CoFixpoint same (a:Sym) := Cons a (same a).
 
 CoFixpoint blink (a b:Sym) := Cons a (Cons b (blink a b)).
 
-CoFixpoint merge (h k:HTape) := 
-           match h with | Cons a h' => 
+CoFixpoint merge (h k:HTape) :=
+           match h with | Cons a h' =>
            match k with | Cons b k' => Cons a (Cons b (merge h' k'))
            end end.
 
@@ -16,7 +16,7 @@ CoInductive EqH: HTape -> HTape -> Prop :=
             eqh: forall a:Sym, forall h k:HTape,
                  EqH h k -> EqH (Cons a h) (Cons a k).
 
-Lemma unfold_HTape: forall h:HTape, 
+Lemma unfold_HTape: forall h:HTape,
                     h = match h with | Cons a k => Cons a k end.
 destruct h. auto.
 Qed.

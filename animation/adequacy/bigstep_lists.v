@@ -5,13 +5,13 @@ Definition HTape2: Set := list Sym.
 
 Inductive Tape2: Set := pair2: HTape2 -> HTape2 -> Tape2.
 
-Definition read2 (t:Tape2): Sym := 
+Definition read2 (t:Tape2): Sym :=
            match t with (pair2 l r) =>
            match r with nil => B
                       | cons b r' => b
            end end.
 
-Definition is_value2 (T:Spec) (t:Tape2) (q:State) := 
+Definition is_value2 (T:Spec) (t:Tape2) (q:State) :=
            tr T q (read2 t) = None.
 
 (****************** INDUCTIVE Semantics *********************)
@@ -22,7 +22,7 @@ Inductive bf2: Spec -> Tape2 -> State -> Tape2 -> State -> Prop :=
 
    bfH2: forall T:Spec, forall q:State,
         forall t:Tape2,
-        (is_value2 T t q) -> 
+        (is_value2 T t q) ->
         (bf2 T t q t q)
 
 (* RIGHT moves *)

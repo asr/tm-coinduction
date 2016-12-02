@@ -1,7 +1,7 @@
 
 (**************** WITNESS Machine ***************)
 
-Definition witness := 
+Definition witness :=
   (app Copy
   (app (shift HM     7)
        (shift Dither (max_source HM 0 + 8)))).
@@ -33,9 +33,9 @@ apply plus_le_compat. apply max_source_ge. assumption. assumption.
 Qed.
 
 Lemma maxsource_swap: forall M n a b,
-      max_source (cons a (cons b M)) n = 
+      max_source (cons a (cons b M)) n =
       max_source (cons b (cons a M)) n.
-intros. 
+intros.
 destruct a. destruct p. destruct p.
 destruct b. destruct p. destruct p. simpl.
 
@@ -62,10 +62,10 @@ elim H; clear H a; intro.
 
 rewrite gt_true. reflexivity. assumption.
 rewrite H. rewrite gt_false. reflexivity.
-omega. assumption. assumption. 
+omega. assumption. assumption.
 
 rewrite gt_true. rewrite gt_true. rewrite gt_false. reflexivity.
-omega. assumption. assumption. assumption. 
+omega. assumption. assumption. assumption.
 Qed.
 
 Lemma max_source_1step: forall p a x q b M n,
@@ -84,13 +84,13 @@ simpl. reflexivity.
 rewrite maxsource_swap.
 destruct a. destruct p. destruct p.
 
-rewrite max_source_1step. simpl (max_source (((s0, s2, s, h) :: M) ++ a0 :: nil) n). 
+rewrite max_source_1step. simpl (max_source (((s0, s2, s, h) :: M) ++ a0 :: nil) n).
 elim (le_gt_dec s0 n); intros.
 
 rewrite gt_false. apply IHM. assumption.
 
 rewrite gt_true. apply IHM. assumption.
-Qed. 
+Qed.
 
 Lemma maxsource_app_comm: forall M N n,
       max_source (app M N) n = max_source (app N M) n.
@@ -118,5 +118,5 @@ rewrite <- plus_assoc. change (8+1) with 9.
 
 apply max_source_shift. omega.
 
-omega. omega. omega. 
+omega. omega. omega.
 Qed.

@@ -51,7 +51,7 @@ Lemma move_preserves_halt_app: forall M p a,
       tr M p a = None ->
       forall N,
       tr N p a = tr (app M N) p a.
-induction M; intros. 
+induction M; intros.
 
 simpl. reflexivity.
 
@@ -63,7 +63,7 @@ rewrite a, a1 in H.
 rewrite eq_state in H. rewrite eq_sym in H.
 inversion H.
 
-rewrite <- a in H |- *. 
+rewrite <- a in H |- *.
 rewrite eq_state in H |- *. rewrite neq_sym in H |- *.
 apply IHM. assumption. auto. auto.
 
@@ -83,7 +83,7 @@ induction M; intros.
 
 simpl in H. contradiction H. reflexivity.
 
-destruct a. destruct p0. destruct p0. simpl in H |-*. 
+destruct a. destruct p0. destruct p0. simpl in H |-*.
 elim (eq_nat_dec p s0); intro.
 elim (eq_sym_dec a0 s2); intro.
 
@@ -105,7 +105,7 @@ Qed.
 
 Lemma derive_not_source: forall M i a,
       ~ In i (proj_source M) -> tr M i a=None.
-induction M; intros. 
+induction M; intros.
 
 simpl. reflexivity.
 
@@ -122,7 +122,7 @@ Qed.
 
 Lemma derive_target: forall M p a i x,
       tr M p a=(Some (i, x)) -> In i (proj_target M).
-induction M; intros. 
+induction M; intros.
 
 simpl in H. inversion H.
 
@@ -152,16 +152,16 @@ induction 3; intros.
 
 (* halt *)
 
-apply bfH. 
+apply bfH.
 unfold is_value. rewrite <- move_preserves_halt_app.
 assumption. assumption.
 
 (* move R *)
 
-apply bfR with i. 
+apply bfR with i.
 
 rewrite <- move_preserves_halt_app.
-assumption. assumption. 
+assumption. assumption.
 
 apply IHbf; clear IHbf.
 
@@ -173,10 +173,10 @@ assumption.
 
 (* move L *)
 
-apply bfL with i. 
+apply bfL with i.
 
 rewrite <- move_preserves_halt_app.
-assumption. assumption. 
+assumption. assumption.
 
 apply IHbf; clear IHbf.
 
@@ -188,10 +188,10 @@ assumption.
 
 (* write *)
 
-apply bfW with i a. 
+apply bfW with i a.
 
 rewrite <- move_preserves_halt_app.
-assumption. assumption. 
+assumption. assumption.
 
 apply IHbf; clear IHbf.
 
@@ -218,7 +218,7 @@ induction 1; intros.
 
 (*************** stop ***************)
 
-apply bf_preserves_halt_app. 
+apply bf_preserves_halt_app.
 assumption. assumption. assumption.
 
 (************* move R ***************)
@@ -231,7 +231,7 @@ rewrite <- move_preserves_app.
 assumption.
 rewrite H. discriminate.
 
-(* induction *) 
+(* induction *)
 
 apply IHbf; assumption.
 
@@ -245,7 +245,7 @@ rewrite <- move_preserves_app.
 assumption.
 rewrite H. discriminate.
 
-(* induction *) 
+(* induction *)
 
 apply IHbf; assumption.
 
@@ -259,7 +259,7 @@ rewrite <- move_preserves_app.
 assumption.
 rewrite H. discriminate.
 
-(* induction *) 
+(* induction *)
 
 apply IHbf; assumption.
 Qed.
@@ -279,10 +279,10 @@ inversion_clear H1 in H.
 
 (* move R *)
 
-apply biR with q. 
+apply biR with q.
 
 rewrite <- move_preserves_halt_app.
-assumption. assumption. 
+assumption. assumption.
 
 apply co_hp; clear co_hp.
 
@@ -295,10 +295,10 @@ assumption.
 
 (* move L *)
 
-apply biL with q. 
+apply biL with q.
 
 rewrite <- move_preserves_halt_app.
-assumption. assumption. 
+assumption. assumption.
 
 apply co_hp; clear co_hp.
 
@@ -311,10 +311,10 @@ assumption.
 
 (* write *)
 
-apply biW with q a. 
+apply biW with q a.
 
 rewrite <- move_preserves_halt_app.
-assumption. assumption. 
+assumption. assumption.
 
 apply co_hp; clear co_hp.
 
@@ -343,7 +343,7 @@ inversion_clear H in H0.
 
 (*************** stop ***************)
 
-apply bi_preserves_halt_app. 
+apply bi_preserves_halt_app.
 assumption. assumption. assumption.
 
 (************* move R ***************)
@@ -356,7 +356,7 @@ rewrite <- move_preserves_app.
 assumption.
 rewrite H2. discriminate.
 
-(* coinduction *) 
+(* coinduction *)
 
 apply co_hp with t q; assumption.
 
@@ -370,7 +370,7 @@ rewrite <- move_preserves_app.
 assumption.
 rewrite H2. discriminate.
 
-(* coinduction *) 
+(* coinduction *)
 
 apply co_hp with t q; assumption.
 
@@ -384,7 +384,7 @@ rewrite <- move_preserves_app.
 assumption.
 rewrite H2. discriminate.
 
-(* coinduction *) 
+(* coinduction *)
 
 apply co_hp with t q; assumption.
 Qed.

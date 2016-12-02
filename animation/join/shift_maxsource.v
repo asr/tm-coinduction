@@ -1,5 +1,5 @@
 
-Fixpoint gtstate (q p:State) {struct q}: bool := 
+Fixpoint gtstate (q p:State) {struct q}: bool :=
          match q with | 0 => false
                       | (S u) => match p with | 0 => true
                                               | (S v) => (gtstate u v)
@@ -15,13 +15,13 @@ Fixpoint max_source (T:Spec) (n:nat) {struct T}: nat :=
 
 Lemma gt_true: forall a b, a>b -> (gtstate a b)=true.
 double induction a b; intros; auto.
-omega. omega. simpl. apply H0. omega. 
+omega. omega. simpl. apply H0. omega.
 Qed.
 
 Lemma gt_false: forall a b, a<=b -> (gtstate a b)=false.
 double induction a b; intros; auto.
 omega. simpl. apply H0. omega.
-Qed. 
+Qed.
 
 Lemma max_source_mono: forall M m n,
       m <= n -> max_source M m <= max_source M n.
@@ -51,7 +51,7 @@ elim (le_gt_dec s0 n); intros.
 rewrite gt_false. apply IHM. assumption.
 rewrite gt_true.
 assert (n <= max_source M n). apply IHM.
-assert (max_source M n <= max_source M s0). 
+assert (max_source M n <= max_source M s0).
 apply max_source_mono. omega.
 omega. assumption.
 Qed.

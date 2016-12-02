@@ -3,7 +3,7 @@
 CoFixpoint Bs := (Cons B Bs).
 
 Lemma unfold_HTape: forall h:HTape,
-	            h = (match h with (Cons a k) => (Cons a k) end).
+                    h = (match h with (Cons a k) => (Cons a k) end).
 destruct h. reflexivity.
 Qed.
 *)
@@ -14,7 +14,7 @@ Qed.
 
 Fixpoint app_ls (l:HTape2) (s:HTape) {struct l}: HTape :=
          match l with
-         | nil => s 
+         | nil => s
          | (cons b l') => (Cons b (app_ls l' s))
          end.
 
@@ -34,7 +34,7 @@ induction 1; intros.
 
 (* halt *)
 
-rewrite H0 in H. rewrite H1 in H0; clear H1. inversion_clear H0. 
+rewrite H0 in H. rewrite H1 in H0; clear H1. inversion_clear H0.
 apply bfH.
 unfold is_value2 in H. unfold is_value. destruct r.
 simpl in H. rewrite unfold_Bs. simpl. assumption.
@@ -55,7 +55,7 @@ apply IHbf2. reflexivity. assumption.
 inversion H1. rewrite <- H4; clear H1.
 apply bfR with i.
 simpl. simpl in H. assumption.
-simpl. 
+simpl.
 assert ((Cons B (app_ls l Bs) =
         (app_ls (cons B l) Bs))).
 simpl. reflexivity. rewrite H1; clear H1.
@@ -82,7 +82,7 @@ apply bfL with i.
 destruct r.
 simpl. simpl in H. assumption.
 simpl. simpl in H. assumption.
-simpl. 
+simpl.
 assert ((Cons B (app_ls r Bs) =
         (app_ls (cons B r) Bs))).
 simpl. reflexivity. rewrite H1; clear H1.
@@ -105,7 +105,7 @@ apply IHbf2. reflexivity. assumption.
 inversion H1. rewrite <- H4; clear H1.
 apply bfW with i a.
 simpl. simpl in H. assumption.
-simpl. 
+simpl.
 assert ((Cons a Bs) =
         (app_ls (cons a nil) Bs)).
 simpl. reflexivity. rewrite H1; clear H1.
@@ -140,7 +140,7 @@ simpl. simpl in H1. assumption.
 
 assert ((hd (app_ls nil Bs)) = B).
 simpl. reflexivity.
-rewrite H; clear H. 
+rewrite H; clear H.
 
 assert ((Cons B (app_ls l0 Bs) =
         (app_ls (cons B l0) Bs))).
@@ -158,7 +158,7 @@ apply cohp with (pair2 (B :: l0) nil). assumption. reflexivity.
 
 inversion H0. rewrite <- H4; clear H0.
 apply biL with q.
-destruct r0. 
+destruct r0.
 simpl. simpl in H1. assumption.
 simpl. simpl in H1. assumption.
 simpl. assert ((Cons b (app_ls r0 Bs) =
@@ -170,12 +170,12 @@ apply cohp with (pair2 l0 (b :: r0)). assumption. reflexivity.
 
 inversion H0. rewrite <- H4; clear H0.
 apply biL with q.
-destruct r0. 
+destruct r0.
 simpl. simpl in H1. assumption.
 simpl. simpl in H1. assumption.
 assert ((hd (app_ls nil Bs)) = B).
 simpl. reflexivity.
-rewrite H; clear H. 
+rewrite H; clear H.
 assert ((Cons B (app_ls r0 Bs) =
         (app_ls (cons B r0) Bs))).
 simpl. reflexivity.
@@ -207,7 +207,7 @@ simpl. simpl in H1. assumption.
 assert (Cons a (tl (app_ls nil Bs)) =
         (app_ls (cons a nil) Bs)).
 simpl. reflexivity.
-rewrite H; clear H. 
+rewrite H; clear H.
 
 apply cohp with (pair2 l0 (a :: nil)). assumption. reflexivity.
 Qed.
@@ -226,7 +226,7 @@ destruct s. simpl. reflexivity.
 Qed.
 
 Lemma trunc_step: forall n a s,
-                  trunc_Str (S n) (Cons a s) = 
+                  trunc_Str (S n) (Cons a s) =
                   cons a (trunc_Str n s).
 simpl. reflexivity.
 Qed.
@@ -300,7 +300,7 @@ simpl. apply biRn with q.
 simpl. simpl in H1. assumption.
 
 apply cohp with (pair (Cons B (Cons s1
-                      (app_ls (trunc_Str m l0) Bs))) 
+                      (app_ls (trunc_Str m l0) Bs)))
                       Bs).
 simpl in H2. assumption.
 simpl. rewrite trunc_trunc. reflexivity.
@@ -316,7 +316,7 @@ rewrite H4 in H1, H2; clear H4. rewrite H3 in H1, H2; clear H3.
 simpl. apply biRc with q.
 simpl. simpl in H1. assumption.
 
-rewrite trunc_trunc. 
+rewrite trunc_trunc.
 apply cohp with (pair (Cons s0 Bs)
                       (app_ls (trunc_Str n r0) Bs)).
 simpl in H2. assumption.
@@ -331,8 +331,8 @@ rewrite H4 in H1, H2; clear H4. rewrite H3 in H1, H2; clear H3.
 simpl. apply biRc with q.
 simpl. simpl in H1. assumption.
 
-do 2 rewrite trunc_trunc. 
-apply cohp with (pair (Cons s0 (Cons s1 
+do 2 rewrite trunc_trunc.
+apply cohp with (pair (Cons s0 (Cons s1
                                (app_ls (trunc_Str m l0) Bs)))
                       (app_ls (trunc_Str n r0) Bs)).
 simpl in H2. assumption.
@@ -403,7 +403,7 @@ rewrite H4 in H1, H2; clear H4. rewrite H3 in H1, H2; clear H3.
 simpl. do 2 rewrite trunc_trunc. apply biLc with q.
 simpl. simpl in H1. assumption.
 
-apply cohp with (pair (app_ls (trunc_Str m l0) Bs) 
+apply cohp with (pair (app_ls (trunc_Str m l0) Bs)
                       (app_ls (cons s1 (cons s0 (trunc_Str n r0))) Bs)).
 simpl in H2. assumption.
 reflexivity.
@@ -443,7 +443,7 @@ rewrite H4 in H1, H2; clear H4. rewrite H3 in H1, H2; clear H3.
 simpl. apply biWn with q a.
 simpl. simpl in H1. assumption.
 
-rewrite trunc_trunc. 
+rewrite trunc_trunc.
 apply cohp with (pair (app_ls (cons s1 (trunc_Str m l0)) Bs)
                       (app_ls (cons a nil) Bs)).
 simpl. simpl in H2. assumption.
@@ -474,7 +474,7 @@ rewrite H4 in H1, H2; clear H4. rewrite H3 in H1, H2; clear H3.
 simpl. apply biWc with q a.
 simpl. simpl in H1. assumption.
 
-do 2 rewrite trunc_trunc. 
+do 2 rewrite trunc_trunc.
 apply cohp with (pair (app_ls (cons s1 (trunc_Str m l0)) Bs)
                       (app_ls (cons a (trunc_Str n r0)) Bs)).
 simpl. simpl in H2. assumption.

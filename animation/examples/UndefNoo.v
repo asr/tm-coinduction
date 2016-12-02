@@ -8,9 +8,9 @@
       2 B -> 1 1
 *)
 
-Definition undef: Spec := (1, one, 1,     R) :: 
-                          (1, B  , 2, W one) :: 
-                          (2, one, 2,     L) :: 
+Definition undef: Spec := (1, one, 1,     R) ::
+                          (1, B  , 2, W one) ::
+                          (2, one, 2,     L) ::
                           (2, B  , 1, W one) :: nil.
 
 (****************** Split Divergence, via SF1 *********************)
@@ -41,8 +41,8 @@ cofix cohp.
 intros. inversion_clear H.
 
 apply gsiC with q (pair (Cons (hd r) l) (tl r)).
-apply sf1A. apply s1R. assumption. 
-apply cohp. assumption. 
+apply sf1A. apply s1R. assumption.
+apply cohp. assumption.
 
 apply gsiC with q (pair (tl l) (Cons (hd l) r)).
 apply sf1A. apply s1L. assumption.
@@ -127,7 +127,7 @@ apply sf1A. apply s1W. auto.
 
 apply sf1I with 1 (pair (Cons one l) (app_ls (ones m) Bs)).
 apply s1R. auto.
-rewrite <- ones_comm. apply IHm. 
+rewrite <- ones_comm. apply IHm.
 Qed.
 
 apply undef_scan_right.

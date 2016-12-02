@@ -13,7 +13,7 @@ unfold witness at 1.
 
 (* First decomposition *)
 
-apply join_stop with 
+apply join_stop with
       (pair Bs (app_ls (ones (S (gamma witness)))
                        (Cons B (app_ls (ones (S (gamma witness))) Bs))))
       7.
@@ -30,7 +30,7 @@ apply join_stop with (pair Bs (Cons one (Cons one Bs)))
 (* HM machine *)
 
 change 7 with (7+0) at 2.
-change 8 with (7+1). rewrite (plus_comm 7 1). 
+change 8 with (7+1). rewrite (plus_comm 7 1).
 rewrite plus_assoc. rewrite (plus_comm (max_source HM 0 + 1) 7).
 apply shift_preserves_stop. apply HM_decides_loop.
 assumption.
@@ -48,7 +48,7 @@ apply shift_preserves_stop. apply Dither_stops.
 (* join condition: 1st check
 *)
 
-clear H; unfold not, Dither. simpl; intros. 
+clear H; unfold not, Dither. simpl; intros.
 
 assert (i <= (max_source HM 0)+7).
 apply shift_maxsource. assumption.
@@ -59,7 +59,7 @@ omega.
 
 clear H; unfold not, Dither. simpl; intros.
 
-assert (i >= 7 \/ In i (proj_target 
+assert (i >= 7 \/ In i (proj_target
        ((max_source HM 0 + 8 + 0, one, max_source HM 0 + 8 + 1, R)
           :: (max_source HM 0 + 8 + 1, B, max_source HM 0 + 8 + 0, L)
              :: (max_source HM 0 + 8 + 1, one, max_source HM 0 + 8 + 2, L)

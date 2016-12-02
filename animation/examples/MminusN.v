@@ -13,15 +13,15 @@
                     5 B -> 5 R
                     5 0 -> 2 R
 
-Definition pminus: Spec := (1,  one, 1,      R) :: 
-                           (1,  B  , 2,      R) :: 
-                           (2, zero, 2,      R) :: 
-                           (2,  one, 3, W zero) :: 
-                           (3, zero, 3,      L) :: 
-                           (3,    B, 4,      L) :: 
-                           (4,    B, 4,      L) :: 
-                           (4,  one, 5,    W B) :: 
-                           (5,    B, 5,      R) :: 
+Definition pminus: Spec := (1,  one, 1,      R) ::
+                           (1,  B  , 2,      R) ::
+                           (2, zero, 2,      R) ::
+                           (2,  one, 3, W zero) ::
+                           (3, zero, 3,      L) ::
+                           (3,    B, 4,      L) ::
+                           (4,    B, 4,      L) ::
+                           (4,  one, 5,    W B) ::
+                           (5,    B, 5,      R) ::
                            (5, zero, 2,      R) :: nil.
 *)
 
@@ -98,7 +98,7 @@ auto. simpl. apply bfL with 4.
 auto. simpl. apply bfW with 5 B.
 auto. simpl. apply bfR with 5.
 auto. simpl. apply bfR with 5.
-auto. simpl. 
+auto. simpl.
 
 (*
 core property: from state 5, in the end you reach state 2 and stop
@@ -127,8 +127,8 @@ Lemma pminus_stops_aux_2to2: forall k l,
 induction k; simpl; intros.
 apply bfH. unfold is_value. auto.
 apply bfR with 2.
-auto. simpl. 
-rewrite <- zeros_comm2. apply IHk. 
+auto. simpl.
+rewrite <- zeros_comm2. apply IHk.
 Qed.
 
 rewrite <- zeros_comm2. apply pminus_stops_aux_2to2.
@@ -148,9 +148,9 @@ omega.
 
 clear H. apply bfR with 2.
 auto. simpl.
-apply sf_to_bf with 
-      (pair (app_ls (zeros k) (Cons zero (Cons B (Cons B 
-                    (app_ls (blanks k) (Cons one (app_ls (ones n0) Bs))))))) 
+apply sf_to_bf with
+      (pair (app_ls (zeros k) (Cons zero (Cons B (Cons B
+                    (app_ls (blanks k) (Cons one (app_ls (ones n0) Bs)))))))
             (Cons one (app_ls (ones n1) Bs))) 2.
 
 Lemma sf_2: forall k l r,
@@ -170,7 +170,7 @@ apply sf_2.
 apply bfW with 3 zero.
 auto. simpl.
 apply sf_to_bf with
-      (pair (Cons zero (Cons B (Cons B (app_ls (blanks k) 
+      (pair (Cons zero (Cons B (Cons B (app_ls (blanks k)
                        (Cons one (app_ls (ones n0) Bs))))))
             (app_ls (zeros k) (Cons zero (app_ls (ones n1) Bs)))) 3.
 
@@ -191,7 +191,7 @@ apply sf_3.
 rewrite zeros_comm2. apply bfL with 3.
 auto. simpl. apply bfL with 3.
 auto. simpl. apply bfL with 4.
-auto. simpl. 
+auto. simpl.
 
 apply sf_to_bf with
       (pair (Cons one (app_ls (ones n0) Bs))
@@ -219,10 +219,10 @@ auto. simpl. apply bfW with 5 B.
 auto. simpl. apply bfR with 5.
 auto. simpl. apply bfR with 5.
 auto. simpl. apply bfR with 5.
-auto. simpl. 
+auto. simpl.
 
 apply sf_to_bf with
-      (pair (app_ls (blanks k) (Cons B (Cons B (Cons B 
+      (pair (app_ls (blanks k) (Cons B (Cons B (Cons B
                     (app_ls (ones n0) Bs)))))
             (Cons zero (Cons zero (app_ls (zeros k)
                    (app_ls (ones n1) Bs))))) 5.
@@ -250,6 +250,6 @@ apply H0. omega.
 Qed.
 
 rewrite blanks_step. rewrite blanks_comm.
-rewrite zeros_step. 
+rewrite zeros_step.
 apply pminus_stops_5_B_0. assumption.
 Qed.

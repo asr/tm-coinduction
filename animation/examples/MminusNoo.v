@@ -14,15 +14,15 @@
                     5 0 -> 2 R
 *)
 
-Definition pminus: Spec := (1,  one, 1,      R) :: 
-                           (1,  B  , 2,      R) :: 
-                           (2, zero, 2,      R) :: 
-                           (2,  one, 3, W zero) :: 
-                           (3, zero, 3,      L) :: 
-                           (3,    B, 4,      L) :: 
-                           (4,    B, 4,      L) :: 
-                           (4,  one, 5,    W B) :: 
-                           (5,    B, 5,      R) :: 
+Definition pminus: Spec := (1,  one, 1,      R) ::
+                           (1,  B  , 2,      R) ::
+                           (2, zero, 2,      R) ::
+                           (2,  one, 3, W zero) ::
+                           (3, zero, 3,      L) ::
+                           (3,    B, 4,      L) ::
+                           (4,    B, 4,      L) ::
+                           (4,  one, 5,    W B) ::
+                           (5,    B, 5,      R) ::
                            (5, zero, 2,      R) :: nil.
 
 (************************ Auxiliary objects and properties  ***************)
@@ -36,7 +36,7 @@ Qed.
 
 Fixpoint blanks (n:nat) {struct n}: list Sym :=
          match n with
-         | 0 => nil 
+         | 0 => nil
          | (S m) => (cons B (blanks m))
          end.
 
@@ -47,7 +47,7 @@ Qed.
 
 Fixpoint zeros (n:nat) {struct n}: list Sym :=
          match n with
-         | 0 => nil 
+         | 0 => nil
          | (S m) => (cons zero (zeros m))
          end.
 
@@ -76,7 +76,7 @@ Lemma pminus_loops: forall n m,
       m < n ->
       bi pminus (pair Bs (app_ls (ones (S m))
                                  (Cons B (app_ls (ones (S n)) Bs)))) 1.
-intros. 
+intros.
 
 (*
 move to R till to the first "1" of n, going into state 2
@@ -101,7 +101,7 @@ Qed.
 
 apply pminus_move_from1.
 
-simpl. 
+simpl.
 
 (*
 mandatory transitions from state 2 to 5, to erase a "1" for both m ed n
@@ -122,7 +122,7 @@ simpl. apply biR with 5.
 auto.
 simpl. apply biR with 5.
 auto.
-simpl. assumption. 
+simpl. assumption.
 Qed.
 
 apply pminus_1stcycle_from2.
@@ -156,7 +156,7 @@ double induction n m; simpl; intros.
 
 (* m=n=0 *)
 
-omega. 
+omega.
 
 (* m=p+1, n=0 *)
 
@@ -181,7 +181,7 @@ Lemma pminus_loops_aux_2to2: forall k l r,
 induction k; simpl; intros.
 assumption.
 apply biR with 2.
-auto. simpl. apply IHk. 
+auto. simpl. apply IHk.
 rewrite zeros_comm. simpl. assumption.
 Qed.
 
@@ -192,12 +192,12 @@ auto. simpl.
 
 Lemma pminus_loops_aux_3to3: forall k l r,
       bi pminus (pair l (Cons zero (app_ls (zeros k) (Cons zero r)))) 3 ->
-      bi pminus (pair (app_ls (zeros k) (Cons zero l)) (Cons zero r)) 3. 
+      bi pminus (pair (app_ls (zeros k) (Cons zero l)) (Cons zero r)) 3.
 induction k; simpl; intros.
 apply biL with 3.
 auto. simpl. assumption.
 apply biL with 3.
-auto. simpl. apply IHk. 
+auto. simpl. apply IHk.
 rewrite zeros_comm. simpl. assumption.
 Qed.
 
@@ -208,7 +208,7 @@ apply pminus_loops_aux_5to3.
 
 apply biL with 3.
 auto. simpl. apply biL with 4.
-auto. simpl. 
+auto. simpl.
 
 Lemma pminus_loops_aux_4to4: forall k l r,
       bi pminus (pair l (app_ls (blanks k) (Cons B r))) 4 ->
@@ -221,7 +221,7 @@ apply IHk.
 rewrite blanks_comm. simpl. assumption.
 Qed.
 
-apply pminus_loops_aux_4to4. 
+apply pminus_loops_aux_4to4.
 rewrite blanks_comm. simpl. apply pminus_loops_4_Bs_B.
 
 (* m=q+1, n=p+1 *)
@@ -229,10 +229,10 @@ rewrite blanks_comm. simpl. apply pminus_loops_4_Bs_B.
 clear H. apply pminus_loops_aux_5to3.
 
 Lemma pminus_loops_aux_3to5: forall k l r,
-      bi pminus (pair (Cons B (Cons B (app_ls (blanks k) 
+      bi pminus (pair (Cons B (Cons B (app_ls (blanks k)
                               (Cons B l))))
                       (Cons zero r)) 5 ->
-      bi pminus (pair (Cons B (Cons B (app_ls (blanks k) 
+      bi pminus (pair (Cons B (Cons B (app_ls (blanks k)
                               (Cons one l))))
                       (Cons zero r)) 3.
 intros. apply biL with 3.
@@ -247,7 +247,7 @@ auto. simpl. apply biW with 5 B.
 auto. simpl.
 rewrite blanks_comm. simpl.
 rewrite blanks_comm in H. simpl in H.
-assert (forall l, 
+assert (forall l,
        (Cons B (Cons B (Cons B (app_ls (blanks k) l)))) =
        (app_ls (blanks (S (S (S k)))) l)).
 simpl. reflexivity.

@@ -1,9 +1,9 @@
 
-Definition read (t:Tape): Sym := 
+Definition read (t:Tape): Sym :=
            match t with (pair l r) => (hd r)
            end.
 
-Definition is_value (T:Spec) (t:Tape) (q:State) := 
+Definition is_value (T:Spec) (t:Tape) (q:State) :=
            tr T q (read t) = None.
 
 (****************** INDUCTIVE Semantics *********************)
@@ -14,7 +14,7 @@ Inductive bf: Spec -> Tape -> State -> Tape -> State -> Prop :=
 
    bfH: forall T:Spec, forall q:State,
         forall t:Tape,
-        (is_value T t q) -> 
+        (is_value T t q) ->
         (bf T t q t q)
 
 (* RIGHT move *)
