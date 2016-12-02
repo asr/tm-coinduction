@@ -1,0 +1,26 @@
+-R . animation
+./coinduction.v
+./halting/halting_defs.v
+./halting/witness.v
+./halting/copy.v
+./halting/halt_not_halt.v
+./halting/undecidability.v
+./halting/not_halt_halt.v
+./halting/dither.v
+./examples/UndefNoo_unguarded.v
+./examples/Ndiv2.v
+./examples/MminusN.v
+./examples/Ndiv2oo.v
+./examples/UndefNoo.v
+./examples/MminusNoo.v
+./adequacy/streams_vs_lists.v
+./adequacy/bigstep_lists.v
+./adequacy/smallstep.v
+./adequacy/big_vs_small.v
+./index.v
+./bf_vs_bi.v
+./datatypes.v
+./join/join.v
+./join/shift.v
+./join/shift_maxsource.v
+./bigstep.v

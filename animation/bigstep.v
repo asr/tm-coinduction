@@ -1,4 +1,6 @@
 
+Require Import datatypes.
+
 Definition read (t:Tape): Sym :=
            match t with (pair l r) => (hd r)
            end.

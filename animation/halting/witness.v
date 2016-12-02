@@ -1,4 +1,12 @@
 
+Require Import Arith List Omega.
+
+Require Import copy.
+Require Import dither.
+Require Import halting_defs.
+Require Import shift.
+Require Import shift_maxsource.
+
 (**************** WITNESS Machine ***************)
 
 Definition witness :=
@@ -42,7 +50,7 @@ destruct b. destruct p. destruct p. simpl.
 elim (le_gt_dec s0 n); intros.
 
 rewrite gt_false.
-elim (le_gt_dec s4 n); intros.
+elim (le_gt_dec s3 n); intros.
 
 rewrite gt_false. reflexivity. assumption.
 
@@ -50,14 +58,14 @@ rewrite gt_true. rewrite gt_false. reflexivity. omega.
 assumption. assumption.
 
 rewrite gt_true.
-elim (le_gt_dec s4 n); intros.
+elim (le_gt_dec s3 n); intros.
 
 rewrite gt_false. rewrite gt_false. reflexivity. assumption. omega.
 
-elim (le_gt_dec s4 s0); intros.
+elim (le_gt_dec s3 s0); intros.
 
 rewrite gt_false. rewrite gt_true.
-assert (s4 < s0 \/ s4 = s0). apply le_lt_or_eq. assumption.
+assert (s3 < s0 \/ s3 = s0). apply le_lt_or_eq. assumption.
 elim H; clear H a; intro.
 
 rewrite gt_true. reflexivity. assumption.
@@ -84,7 +92,7 @@ simpl. reflexivity.
 rewrite maxsource_swap.
 destruct a. destruct p. destruct p.
 
-rewrite max_source_1step. simpl (max_source (((s0, s2, s, h) :: M) ++ a0 :: nil) n).
+rewrite max_source_1step. simpl (max_source (((s0, s1, s, h) :: M) ++ a0 :: nil) n).
 elim (le_gt_dec s0 n); intros.
 
 rewrite gt_false. apply IHM. assumption.

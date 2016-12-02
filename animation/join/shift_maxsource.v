@@ -1,4 +1,10 @@
 
+Require Import List Omega.
+
+Require Import datatypes.
+Require Import join.
+Require Import shift.
+
 Fixpoint gtstate (q p:State) {struct q}: bool :=
          match q with | 0 => false
                       | (S u) => match p with | 0 => true

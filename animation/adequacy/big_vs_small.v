@@ -1,4 +1,10 @@
 
+Require Import List.
+
+Require Import bigstep.
+Require Import datatypes.
+Require Import smallstep.
+
 (****************** Big -> Small *********************)
 
 Lemma if_bf_then_sf: forall T s p t q,

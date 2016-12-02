@@ -1,4 +1,10 @@
 
+Require Import List Omega.
+
+Require Import bigstep.
+Require Import datatypes.
+Require Import join.
+
 Fixpoint shift (T:Spec) (n:nat) {struct T}: Spec :=
          match T with | nil => nil
                       | (cons A T') =>
@@ -28,8 +34,8 @@ unfold is_value. simpl. reflexivity.
 
 destruct a. destruct p0. destruct p0. simpl.
 unfold is_value in IHT, H |-*. simpl in H |-*.
-elim (eq_nat_dec p s2); intro.
-elim (eq_sym_dec (read s) s3); intro.
+elim (eq_nat_dec p s1); intro.
+elim (eq_sym_dec (read s) s2); intro.
 
 rewrite a, a0 in H.
 rewrite eq_state in H. rewrite eq_sym in H. inversion H.
@@ -53,8 +59,8 @@ simpl in H. inversion H.
 
 destruct a. destruct p0. destruct p0.
 simpl in H |-*.
-elim (eq_nat_dec p s2); intro.
-elim (eq_sym_dec s s3); intro.
+elim (eq_nat_dec p s1); intro.
+elim (eq_sym_dec s s2); intro.
 
 rewrite a, a0 in H |-*.
 rewrite eq_state in H |-*. rewrite eq_sym in H |-*.

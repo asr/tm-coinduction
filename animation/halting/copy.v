@@ -1,4 +1,17 @@
 
+Require Import List Omega.
+
+Require Import big_vs_small.
+Require Import bigstep.
+Require Import coinduction.
+Require Import datatypes.
+Require Import MminusN.
+Require Import MminusNoo.
+Require Import Ndiv2oo.
+Require Import smallstep.
+Require Import streams_vs_lists.
+Require Import UndefNoo.
+
 (**************** COPY Machine ***************)
 
 Definition Copy: Spec := (0, one , 0, W zero) ::

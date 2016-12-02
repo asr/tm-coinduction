@@ -1,4 +1,7 @@
 
+Require Import datatypes.
+Require Import bigstep.
+
 (****************** One-step Reduction **************)
 
 Inductive s1: Spec -> Tape -> State -> Tape -> State -> Prop :=

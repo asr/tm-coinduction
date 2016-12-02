@@ -1,3 +1,18 @@
+Require Import Arith List Omega.
+
+Require Import bf_vs_bi.
+Require Import bigstep.
+Require Import coinduction.
+Require Import copy.
+Require Import datatypes.
+Require Import dither.
+Require Import halting_defs.
+Require Import join.
+Require Import Ndiv2oo.
+Require Import shift.
+Require Import shift_maxsource.
+Require Import streams_vs_lists.
+Require Import witness.
 
 (* First half of the proof:
    supposing that Witness halts leads to absurd

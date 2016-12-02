@@ -1,4 +1,9 @@
 
+Require Import List Peano_dec.
+
+Require Import bigstep.
+Require Import datatypes.
+
 (**************** Preliminary definitions and proofs ***************)
 
 Fixpoint proj_source (T:Spec) {struct T}: (list State) :=
@@ -57,7 +62,7 @@ simpl. reflexivity.
 
 destruct a. destruct p0. destruct p0. simpl in H |- *.
 elim (eq_nat_dec p s0); intro.
-elim (eq_sym_dec a0 s2); intro.
+elim (eq_sym_dec a0 s1); intro.
 
 rewrite a, a1 in H.
 rewrite eq_state in H. rewrite eq_sym in H.
@@ -85,7 +90,7 @@ simpl in H. contradiction H. reflexivity.
 
 destruct a. destruct p0. destruct p0. simpl in H |-*.
 elim (eq_nat_dec p s0); intro.
-elim (eq_sym_dec a0 s2); intro.
+elim (eq_sym_dec a0 s1); intro.
 
 rewrite a, a1.
 rewrite eq_state. rewrite eq_sym. reflexivity.
@@ -128,7 +133,7 @@ simpl in H. inversion H.
 
 destruct a. destruct p0. destruct p0. simpl in H |- *.
 elim (eq_nat_dec p s0); intro.
-elim (eq_sym_dec a0 s2); intro.
+elim (eq_sym_dec a0 s1); intro.
 
 rewrite a, a1 in H.
 rewrite eq_state in H. rewrite eq_sym in H.

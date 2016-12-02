@@ -1,4 +1,12 @@
 
+Require Import Coq.Setoids.Setoid.
+Require Import List.
+
+Require Import bigstep.
+Require Import bigstep_lists.
+Require Import coinduction.
+Require Import datatypes.
+
 (*
 CoFixpoint Bs := (Cons B Bs).
 

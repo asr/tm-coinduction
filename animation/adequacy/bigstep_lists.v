@@ -1,4 +1,6 @@
 
+Require Import datatypes.
+
 (************* Syntax of Turing machines with lists ***************)
 
 Definition HTape2: Set := list Sym.

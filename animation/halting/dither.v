@@ -1,4 +1,10 @@
 
+Require Import List.
+
+Require Import bigstep.
+Require Import coinduction.
+Require Import datatypes.
+
 (**************** DITHER Machine ***************)
 
 (*
