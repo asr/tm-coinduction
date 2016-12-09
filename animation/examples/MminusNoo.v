@@ -80,41 +80,27 @@ Qed.
 
 (************************ Divergence proof ************************)
 
-Lemma pminus_loops: forall n m,
-      m < n ->
-      bi pminus (pair Bs (app_ls (ones (S m))
-                                 (Cons B (app_ls (ones (S n)) Bs)))) 1.
-intros.
-
 (*
 move to R till to the first "1" of n, going into state 2
 *)
-
 Lemma pminus_move_from1: forall m l r,
       bi pminus (pair (Cons B (app_ls (ones (S m)) l)) r) 2 ->
       bi pminus (pair l (app_ls (ones (S m)) (Cons B r))) 1.
 induction m; simpl; intros.
-
 apply biR with 1.
 auto.
 simpl. apply biR with 2.
 auto.
 simpl. assumption.
-
 apply biR with 1.
 auto.
 simpl. apply IHm.
 rewrite ones_comm. assumption.
 Qed.
 
-apply pminus_move_from1.
-
-simpl.
-
 (*
 mandatory transitions from state 2 to 5, to erase a "1" for both m ed n
 *)
-
 Lemma pminus_1stcycle_from2: forall l r,
       bi pminus (pair (Cons B (Cons B l)) (Cons zero r)) 5 ->
       bi pminus (pair (Cons B (Cons one l)) (Cons one r)) 2.
@@ -133,16 +119,9 @@ auto.
 simpl. assumption.
 Qed.
 
-apply pminus_1stcycle_from2.
-
-(* Here the discrimination between Divergence and Convergence starts *)
-
-rewrite blanks_step, zeros_step. rewrite blanks_comm.
-
 (*
 loop from the state 4, if Bs on the left and reading a B
 *)
-
 Lemma pminus_loops_4_Bs_B: forall r,
       bi pminus (pair Bs (Cons B r)) 4.
 cofix co_hp.
@@ -151,9 +130,87 @@ auto.
 simpl. apply co_hp.
 Qed.
 
-(*
-core property: from state 5, in the end you reach state 4 and loop
-*)
+Lemma pminus_loops_aux_2to2: forall k l r,
+      bi pminus (pair (app_ls (zeros k) l) (Cons one r)) 2 ->
+      bi pminus (pair l (app_ls (zeros k) (Cons one r))) 2.
+induction k; simpl; intros.
+assumption.
+apply biR with 2.
+auto. simpl. apply IHk.
+rewrite zeros_comm. simpl. assumption.
+Qed.
+
+Lemma pminus_loops_aux_3to3: forall k l r,
+      bi pminus (pair l (Cons zero (app_ls (zeros k) (Cons zero r)))) 3 ->
+      bi pminus (pair (app_ls (zeros k) (Cons zero l)) (Cons zero r)) 3.
+induction k; simpl; intros.
+apply biL with 3.
+auto. simpl. assumption.
+apply biL with 3.
+auto. simpl. apply IHk.
+rewrite zeros_comm. simpl. assumption.
+Qed.
+
+Lemma pminus_loops_aux_5to3: forall k l r,
+      bi pminus (pair l (Cons zero (app_ls (zeros k)
+                        (Cons zero r)))) 3 ->
+      bi pminus (pair l (Cons zero (app_ls (zeros k)
+                        (Cons one r)))) 5.
+intros. apply biR with 2.
+auto.
+simpl.
+apply pminus_loops_aux_2to2.
+apply biW with 3 zero.
+auto. simpl.
+apply pminus_loops_aux_3to3. assumption.
+Qed.
+
+Lemma pminus_loops_aux_4to4: forall k l r,
+      bi pminus (pair l (app_ls (blanks k) (Cons B r))) 4 ->
+      bi pminus (pair (app_ls (blanks k) l) (Cons B r)) 4.
+induction k; simpl; intros.
+assumption.
+apply biL with 4.
+auto. simpl.
+apply IHk.
+rewrite blanks_comm. simpl. assumption.
+Qed.
+
+Lemma pminus_loops_aux_5to5: forall k l r,
+      bi pminus (pair (app_ls (blanks k) l) r) 5 ->
+      bi pminus (pair l (app_ls (blanks k) r)) 5.
+induction k; simpl; intros.
+assumption.
+apply biR with 5.
+auto. simpl.
+apply IHk.
+rewrite blanks_comm. simpl. assumption.
+Qed.
+
+Lemma pminus_loops_aux_3to5: forall k l r,
+      bi pminus (pair (Cons B (Cons B (app_ls (blanks k)
+                              (Cons B l))))
+                      (Cons zero r)) 5 ->
+      bi pminus (pair (Cons B (Cons B (app_ls (blanks k)
+                              (Cons one l))))
+                      (Cons zero r)) 3.
+intros. apply biL with 3.
+auto. simpl. apply biL with 4.
+auto. simpl.
+apply pminus_loops_aux_4to4.
+rewrite blanks_comm. simpl.
+apply biL with 4.
+auto. simpl. apply biW with 5 B.
+auto. simpl.
+rewrite blanks_comm. simpl.
+rewrite blanks_comm in H. simpl in H.
+assert (forall l,
+       (Cons B (Cons B (Cons B (app_ls (blanks k) l)))) =
+       (app_ls (blanks (S (S (S k)))) l)).
+simpl. reflexivity.
+rewrite (H0 (Cons zero r)). rewrite (H0 l) in H. clear H0.
+apply pminus_loops_aux_5to5. assumption.
+Qed.
 
 Lemma pminus_loops_5_B_0: forall n m k r,
       m < n ->
@@ -171,115 +228,35 @@ omega.
 omega.
 
 (* m=0, n=p+1 *)
-
 clear H H0.
-
-Lemma pminus_loops_aux_5to3: forall k l r,
-      bi pminus (pair l (Cons zero (app_ls (zeros k)
-                        (Cons zero r)))) 3 ->
-      bi pminus (pair l (Cons zero (app_ls (zeros k)
-                        (Cons one r)))) 5.
-intros. apply biR with 2.
-auto.
-simpl.
-
-Lemma pminus_loops_aux_2to2: forall k l r,
-      bi pminus (pair (app_ls (zeros k) l) (Cons one r)) 2 ->
-      bi pminus (pair l (app_ls (zeros k) (Cons one r))) 2.
-induction k; simpl; intros.
-assumption.
-apply biR with 2.
-auto. simpl. apply IHk.
-rewrite zeros_comm. simpl. assumption.
-Qed.
-
-apply pminus_loops_aux_2to2.
-
-apply biW with 3 zero.
-auto. simpl.
-
-Lemma pminus_loops_aux_3to3: forall k l r,
-      bi pminus (pair l (Cons zero (app_ls (zeros k) (Cons zero r)))) 3 ->
-      bi pminus (pair (app_ls (zeros k) (Cons zero l)) (Cons zero r)) 3.
-induction k; simpl; intros.
-apply biL with 3.
-auto. simpl. assumption.
-apply biL with 3.
-auto. simpl. apply IHk.
-rewrite zeros_comm. simpl. assumption.
-Qed.
-
-apply pminus_loops_aux_3to3. assumption.
-Qed.
-
 apply pminus_loops_aux_5to3.
-
 apply biL with 3.
 auto. simpl. apply biL with 4.
 auto. simpl.
-
-Lemma pminus_loops_aux_4to4: forall k l r,
-      bi pminus (pair l (app_ls (blanks k) (Cons B r))) 4 ->
-      bi pminus (pair (app_ls (blanks k) l) (Cons B r)) 4.
-induction k; simpl; intros.
-assumption.
-apply biL with 4.
-auto. simpl.
-apply IHk.
-rewrite blanks_comm. simpl. assumption.
-Qed.
-
 apply pminus_loops_aux_4to4.
 rewrite blanks_comm. simpl. apply pminus_loops_4_Bs_B.
 
 (* m=q+1, n=p+1 *)
-
 clear H. apply pminus_loops_aux_5to3.
-
-Lemma pminus_loops_aux_3to5: forall k l r,
-      bi pminus (pair (Cons B (Cons B (app_ls (blanks k)
-                              (Cons B l))))
-                      (Cons zero r)) 5 ->
-      bi pminus (pair (Cons B (Cons B (app_ls (blanks k)
-                              (Cons one l))))
-                      (Cons zero r)) 3.
-intros. apply biL with 3.
-auto. simpl. apply biL with 4.
-auto. simpl.
-
-apply pminus_loops_aux_4to4.
-
-rewrite blanks_comm. simpl.
-apply biL with 4.
-auto. simpl. apply biW with 5 B.
-auto. simpl.
-rewrite blanks_comm. simpl.
-rewrite blanks_comm in H. simpl in H.
-assert (forall l,
-       (Cons B (Cons B (Cons B (app_ls (blanks k) l)))) =
-       (app_ls (blanks (S (S (S k)))) l)).
-simpl. reflexivity.
-rewrite (H0 (Cons zero r)). rewrite (H0 l) in H. clear H0.
-
-Lemma pminus_loops_aux_5to5: forall k l r,
-      bi pminus (pair (app_ls (blanks k) l) r) 5 ->
-      bi pminus (pair l (app_ls (blanks k) r)) 5.
-induction k; simpl; intros.
-assumption.
-apply biR with 5.
-auto. simpl.
-apply IHk.
-rewrite blanks_comm. simpl. assumption.
-Qed.
-
-apply pminus_loops_aux_5to5. assumption.
-Qed.
-
 apply pminus_loops_aux_3to5.
-
 rewrite blanks_comm. rewrite zeros_comm.
 apply H0. omega.
 Qed.
 
+Lemma pminus_loops: forall n m,
+      m < n ->
+      bi pminus (pair Bs (app_ls (ones (S m))
+                                 (Cons B (app_ls (ones (S n)) Bs)))) 1.
+intros.
+apply pminus_move_from1.
+simpl.
+apply pminus_1stcycle_from2.
+
+(* Here the discrimination between Divergence and Convergence starts *)
+rewrite blanks_step, zeros_step. rewrite blanks_comm.
+
+(*
+core property: from state 5, in the end you reach state 4 and loop
+*)
 apply pminus_loops_5_B_0. assumption.
 Qed.

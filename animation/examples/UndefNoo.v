@@ -122,44 +122,36 @@ Lemma ones_step2: forall n l,
 simpl. reflexivity.
 Qed.
 
-Lemma undef_loops: forall n,
-      gsi undef (pair Bs (app_ls (ones (S n)) Bs)) 1.
-cofix co_hp.
-intro. apply gsiC with 1 (pair Bs (app_ls (ones (S (S (S n)))) Bs)).
-
-apply sf1_trans with (pair (app_ls (ones (S n)) Bs) (Cons one Bs)) 2.
-
 Lemma undef_scan_right: forall m l,
       sf1 undef (pair l (app_ls (ones m) Bs)) 1
                 (pair (app_ls (ones m) l) (Cons one Bs)) 2.
 induction m; simpl; intros.
-
 apply sf1A. apply s1W. auto.
-
 apply sf1I with 1 (pair (Cons one l) (app_ls (ones m) Bs)).
 apply s1R. auto.
 rewrite <- ones_comm. apply IHm.
 Qed.
 
-apply undef_scan_right.
-
 Lemma undef_scan_left: forall m r,
       sf1 undef (pair (app_ls (ones m) Bs) (Cons one r)) 2
                 (pair Bs (app_ls (ones (S (S m))) r)) 1.
 induction m; simpl; intros.
-
 apply sf1I with 2 (pair Bs (Cons B (Cons one r))).
 apply s1L. auto.
 apply sf1A. apply s1W.
 auto.
-
 apply sf1I with 2 (pair (app_ls (ones m) Bs)
                         (Cons one (Cons one r))).
 apply s1L. auto.
 rewrite <- ones_comm. apply IHm.
 Qed.
 
+Lemma undef_loops: forall n,
+      gsi undef (pair Bs (app_ls (ones (S n)) Bs)) 1.
+cofix co_hp.
+intro. apply gsiC with 1 (pair Bs (app_ls (ones (S (S (S n)))) Bs)).
+apply sf1_trans with (pair (app_ls (ones (S n)) Bs) (Cons one Bs)) 2.
+apply undef_scan_right.
 apply undef_scan_left.
-
 apply co_hp.
 Qed.
