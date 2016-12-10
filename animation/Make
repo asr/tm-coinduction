@@ -1,0 +1,5 @@
+# -*- mode: Makefile; -*-
+
+update_coq_project_file :
+	( echo "-R . animation" && find . -name "*.v" -print | sort ) \
+	  > _CoqProject
