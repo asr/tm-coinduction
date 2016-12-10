@@ -1,6 +1,6 @@
 Changes respect to the original README:
 
-* Tested with Coq 8.5pl3.
+* Tested with Coq 8.6rc1.
 
 * Directory "halting":
   Constructive proof of the undecidability of the halting problem.
