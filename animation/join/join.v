@@ -61,7 +61,7 @@ induction M; intros.
 simpl. reflexivity.
 
 destruct a. destruct p0. destruct p0. simpl in H |- *.
-elim (eq_nat_dec p s0); intro.
+elim (PeanoNat.Nat.eq_dec p s0); intro.
 elim (eq_sym_dec a0 s1); intro.
 
 rewrite a, a1 in H.
@@ -89,7 +89,7 @@ induction M; intros.
 simpl in H. contradiction H. reflexivity.
 
 destruct a. destruct p0. destruct p0. simpl in H |-*.
-elim (eq_nat_dec p s0); intro.
+elim (PeanoNat.Nat.eq_dec p s0); intro.
 elim (eq_sym_dec a0 s1); intro.
 
 rewrite a, a1.
@@ -117,7 +117,7 @@ simpl. reflexivity.
 destruct a. destruct p. destruct p. simpl in H |- *.
 assert (~s0=i /\ ~In i (proj_source M)). tauto.
 inversion_clear H0; clear H.
-elim (eq_nat_dec i s0); intro.
+elim (PeanoNat.Nat.eq_dec i s0); intro.
 
 contradiction H1. auto.
 
@@ -132,7 +132,7 @@ induction M; intros.
 simpl in H. inversion H.
 
 destruct a. destruct p0. destruct p0. simpl in H |- *.
-elim (eq_nat_dec p s0); intro.
+elim (PeanoNat.Nat.eq_dec p s0); intro.
 elim (eq_sym_dec a0 s1); intro.
 
 rewrite a, a1 in H.

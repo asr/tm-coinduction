@@ -1,5 +1,5 @@
 
-Require Import Arith List Omega.
+Require Import List Omega.
 
 Require Import copy.
 Require Import dither.
@@ -27,7 +27,7 @@ simpl. reflexivity.
 destruct a. destruct p. destruct p.
 simpl. elim (le_gt_dec s0 k); intros.
 rewrite (gt_false s0 k).
-rewrite plus_comm at 1.
+rewrite Nat.add_comm at 1.
 rewrite gt_false. apply IHM. assumption.
 
 apply plus_le_compat.
@@ -35,7 +35,7 @@ assert (k <= max_source M k). apply max_source_ge. omega.
 assumption. assumption.
 
 rewrite (gt_true s0 k).
-rewrite plus_comm at 1.
+rewrite Nat.add_comm at 1.
 rewrite gt_false. apply IHM. assumption.
 apply plus_le_compat. apply max_source_ge. assumption. assumption.
 Qed.
@@ -122,7 +122,7 @@ simpl. rewrite (gt_true (max_source HM 0 + 8 + 0) 6).
 rewrite (gt_true (max_source HM 0 + 8 + 1) (max_source HM 0 + 8 + 0)).
 rewrite (gt_false (max_source HM 0 + 8 + 1) (max_source HM 0 + 8 + 1)).
 
-rewrite <- plus_assoc. change (8+1) with 9.
+rewrite <- Nat.add_assoc. change (8+1) with 9.
 
 apply max_source_shift. omega.
 

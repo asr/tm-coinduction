@@ -34,7 +34,7 @@ unfold is_value. simpl. reflexivity.
 
 destruct a. destruct p0. destruct p0. simpl.
 unfold is_value in IHT, H |-*. simpl in H |-*.
-elim (eq_nat_dec p s1); intro.
+elim (Nat.eq_dec p s1); intro.
 elim (eq_sym_dec (read s) s2); intro.
 
 rewrite a, a0 in H.
@@ -59,7 +59,7 @@ simpl in H. inversion H.
 
 destruct a. destruct p0. destruct p0.
 simpl in H |-*.
-elim (eq_nat_dec p s1); intro.
+elim (Nat.eq_dec p s1); intro.
 elim (eq_sym_dec s s2); intro.
 
 rewrite a, a0 in H |-*.

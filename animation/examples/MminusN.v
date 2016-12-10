@@ -149,7 +149,7 @@ Lemma pminus_stops_5_B_0: forall n m k,
                 5
                 (pair (app_ls (zeros (n+(S k)))
                               (app_ls (blanks (n+(S (S k))))
-                              (app_ls (ones (minus m n)) Bs)))
+                              (app_ls (ones (Init.Nat.sub m n)) Bs)))
                       Bs)
                 2.
 double induction n m; simpl; intros.

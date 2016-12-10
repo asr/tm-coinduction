@@ -1,4 +1,4 @@
-Require Import Arith List Omega.
+Require Import List Omega.
 
 Require Import bf_vs_bi.
 Require Import bigstep.
@@ -49,8 +49,8 @@ apply join_loop with (pair Bs (Cons one Bs))
 (* HM machine *)
 
 change 7 with (7+0) at 2.
-change 8 with (7+1). rewrite (plus_comm 7 1).
-rewrite plus_assoc. rewrite (plus_comm (max_source HM 0 + 1) 7).
+change 8 with (7+1). rewrite (Nat.add_comm 7 1).
+rewrite Nat.add_assoc. rewrite (Nat.add_comm (max_source HM 0 + 1) 7).
 apply shift_preserves_stop. apply HM_decides_stop.
 unfold halt. exists t. assumption.
 clear H t.
@@ -58,7 +58,7 @@ clear H t.
 (* Dither machine *)
 
 change (max_source HM 0 + 8) with (0 + (max_source HM 0 + 8)) at 2.
-rewrite (plus_comm 0 (max_source HM 0 + 8)). apply shift_preserves_loop.
+rewrite (Nat.add_comm 0 (max_source HM 0 + 8)). apply shift_preserves_loop.
 apply Dither_loops.
 
 (* join condition: 1st check

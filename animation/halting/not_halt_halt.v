@@ -1,4 +1,4 @@
-Require Import Arith List Omega.
+Require Import List Omega.
 
 Require Import coinduction.
 Require Import copy.
@@ -43,8 +43,8 @@ apply join_stop with (pair Bs (Cons one (Cons one Bs)))
 (* HM machine *)
 
 change 7 with (7+0) at 2.
-change 8 with (7+1). rewrite (plus_comm 7 1).
-rewrite plus_assoc. rewrite (plus_comm (max_source HM 0 + 1) 7).
+change 8 with (7+1). rewrite (Nat.add_comm 7 1).
+rewrite Nat.add_assoc. rewrite (Nat.add_comm (max_source HM 0 + 1) 7).
 apply shift_preserves_stop. apply HM_decides_loop.
 assumption.
 clear H.
@@ -52,10 +52,10 @@ clear H.
 (* Dither machine *)
 
 rewrite max_source_HM_witness.
-change 9 with (8+1). rewrite plus_assoc.
-rewrite <- plus_assoc. change (1+1) with 2.
+change 9 with (8+1). rewrite Nat.add_assoc.
+rewrite <- Nat.add_assoc. change (1+1) with 2.
 change (max_source HM 0 + 8) with (0 + (max_source HM 0 + 8)) at 2.
-rewrite (plus_comm 0 (max_source HM 0 + 8)).
+rewrite (Nat.add_comm 0 (max_source HM 0 + 8)).
 apply shift_preserves_stop. apply Dither_stops.
 
 (* join condition: 1st check

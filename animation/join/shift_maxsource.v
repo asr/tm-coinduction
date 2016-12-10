@@ -75,7 +75,7 @@ simpl in H. simpl. elim (le_gt_dec s0 0); intros.
 inversion_clear H.
 
 rewrite <- H0; clear H0.
-rewrite gt_false. rewrite plus_comm. apply plus_le_compat_r.
+rewrite gt_false. rewrite Nat.add_comm. apply plus_le_compat_r.
 omega. assumption.
 
 rewrite gt_false. apply IHM. assumption. assumption.
@@ -83,7 +83,7 @@ rewrite gt_false. apply IHM. assumption. assumption.
 inversion_clear H.
 
 rewrite <- H0; clear H0.
-rewrite gt_true. rewrite plus_comm. apply plus_le_compat_r.
+rewrite gt_true. rewrite Nat.add_comm. apply plus_le_compat_r.
 apply max_source_ge. assumption.
 
 rewrite gt_true. assert (i <= max_source M 0 + n).
