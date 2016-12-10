@@ -1,5 +1,13 @@
-ASR (2016-12-02): tested with Coq 8.5pl3
+Changes respect to the original README:
 
+* Tested with Coq 8.5pl3.
+
+* Directory "halting":
+  Constructive proof of the undecidability of the halting problem.
+
+------------------------------------------------------------------
+Follow the original README
+------------------------------------------------------------------
 Alberto Ciaffaglione, University of Udine (Italy) - October 2015
 "Towards Turing Computability via Coinduction" in Coq 8.4(pl5)
 
