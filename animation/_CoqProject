@@ -13,6 +13,7 @@
 ./examples/Ndiv2.v
 ./examples/UndefNoo_unguarded.v
 ./examples/UndefNoo.v
+./halting/ConstructiveUndecidability.v
 ./halting/copy.v
 ./halting/dither.v
 ./halting/halting_defs.v
