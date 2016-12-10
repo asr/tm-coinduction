@@ -3,3 +3,7 @@
 update_coq_project_file :
 	( echo "-R . animation" && find . -name "*.v" -print | sort ) \
 	  > _CoqProject
+
+.PHONY: Makefile
+Makefile :
+	coq_makefile -arg '-w all' -f _CoqProject -o Makefile
