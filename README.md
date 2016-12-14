@@ -1,6 +1,6 @@
 # Changes respect to the [original](https://users.dimi.uniud.it/~alberto.ciaffaglione/Turing/Halting/Turing-15.tar.gz) README
 
-* Tested with Coq 8.6rc1.
+* Tested with Coq 8.6.
 
 * Directory `halting`: Constructive proof of the undecidability of the
   halting problem.
